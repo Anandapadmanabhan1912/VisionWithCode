@@ -15,7 +15,9 @@ def convert_image(image_path):
 
     # Convert to GBR (swap channels: BGR -> GBR)
     gbr = img.copy()
-    gbr[:, :, [0, 1, 2]] = img[:, :, [1, 0, 2]]  # Swap B and G channels
+    temp = gbr[:, :, 0].copy()  # Save Blue
+    gbr[:, :, 0] = gbr[:, :, 1] # G → B
+    gbr[:, :, 1] = temp         # B → G  # Swap B and G channels
 
     return gray, rgb, gbr
 
